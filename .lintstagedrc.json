@@ -4,5 +4,5 @@
     "prettier --write",
     "yarn lint"
   ],
-  "package.json": "yarn sort-package-json \"package.json\" \"packages/*/package.json\" --check"
+  "package.json": "yarn sort-package-json \"package.json\" \"packages/*/package.json\""
 }

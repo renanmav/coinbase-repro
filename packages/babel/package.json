@@ -1,0 +1,17 @@
+{
+  "name": "@coinbase/babel",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "build": "echo 'Nothing to build'",
+    "test": "echo 'Nothing to test'"
+  },
+  "devDependencies": {
+    "@babel/core": "*",
+    "babel-preset-expo": "^8.4.1"
+  }
+}
