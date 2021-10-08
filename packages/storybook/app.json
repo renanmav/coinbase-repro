@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Coinbase",
-    "slug": "coinbase",
+    "name": "CoinbaseStorybook",
+    "slug": "coinbase-storybook",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,12 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.coinbase",
+      "bundleIdentifier": "com.coinbase.storybook",
       "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.coinbase",
+      "package": "com.coinbase.storybook",
       "versionCode": 420010000,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
