@@ -6,6 +6,8 @@ packages/*/build
 .expo
 __generated__
 web-build
+.expo-shared
+packages/*/index.js
 
 # macOS
 .DS_Store

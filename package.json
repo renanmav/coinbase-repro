@@ -9,7 +9,7 @@
     "app": "yarn workspace @coinbase/app",
     "components": "yarn workspace @coinbase/components",
     "delete:node_modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
-    "postinstall": "husky install && echo 'Ready to hack!'",
+    "postinstall": "husky install && expo-yarn-workspaces check-workspace-dependencies && echo 'Ready to hack!'",
     "lint": "eslint --fix --ext .js,jsx,.ts,.tsx"
   },
   "devDependencies": {
