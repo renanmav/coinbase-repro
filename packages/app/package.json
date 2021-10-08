@@ -1,0 +1,39 @@
+{
+  "name": "@coinbase/app",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "android": "expo start --android",
+    "eject": "expo eject",
+    "postinstall": "expo-yarn-workspaces postinstall",
+    "ios": "expo start --ios",
+    "start": "expo start",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "expo": "~42.0.1",
+    "expo-keep-awake": "~9.2.0",
+    "expo-status-bar": "~1.0.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-web": "~0.13.12"
+  },
+  "devDependencies": {
+    "@babel/core": "*",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "~0.63.2",
+    "typescript": "^4.3.5"
+  },
+  "expo-yarn-workspaces": {
+    "symlinks": [
+      "expo-application",
+      "expo-error-recovery",
+      "expo-file-system",
+      "expo-keep-awake",
+      "expo-modules-core",
+      "expo-structured-headers"
+    ]
+  }
+}

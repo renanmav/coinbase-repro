@@ -6,6 +6,8 @@
     "packages/*"
   ],
   "scripts": {
+    "app": "yarn workspace @coinbase/app",
+    "delete:node_modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
     "postinstall": "husky install && echo 'Ready to hack!'",
     "lint": "eslint --fix --ext .js,jsx,.ts,.tsx"
   },
