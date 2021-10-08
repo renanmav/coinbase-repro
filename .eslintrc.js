@@ -1,1 +1,3 @@
-module.exports = require("@coinbase/eslint");
+const config = require("@coinbase/eslint");
+
+module.exports = config;

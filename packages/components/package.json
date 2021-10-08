@@ -1,0 +1,24 @@
+{
+  "name": "@coinbase/components",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "start-storybook -p 9001 -c .storybook -s ../app/assets"
+  },
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-web": "~0.13.12"
+  },
+  "devDependencies": {
+    "@babel/core": "*",
+    "@storybook/addon-docs": "^6.3.10",
+    "@storybook/cli": "^6.3.10",
+    "@storybook/react": "^6.3.10",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "~0.63.2",
+    "typescript": "^4.3.5"
+  }
+}

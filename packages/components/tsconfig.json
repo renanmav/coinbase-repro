@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.shared.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "react-native",
+    "lib": ["ESNext", "dom"],
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "ESNext",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}
