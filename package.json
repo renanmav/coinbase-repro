@@ -1,0 +1,20 @@
+{
+  "name": "@coinbase/monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "husky install && echo 'Ready to hack!'",
+    "lint": "eslint --fix --ext .js,jsx,.ts,.tsx"
+  },
+  "devDependencies": {
+    "@babel/core": "*",
+    "@tsconfig/recommended": "^1.0.1",
+    "expo-yarn-workspaces": "^1.5.2",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.0",
+    "sort-package-json": "^1.52.0"
+  }
+}

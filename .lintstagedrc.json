@@ -1,0 +1,8 @@
+{
+  "*.{css,md,yaml,yml}": "prettier --write",
+  "*.{js,jsx,ts,tsx}": [
+    "prettier --write",
+    "yarn lint"
+  ],
+  "package.json": "yarn sort-package-json \"package.json\" \"packages/*/package.json\" --check"
+}
