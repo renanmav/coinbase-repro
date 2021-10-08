@@ -1,4 +1,4 @@
-import { foo } from "@coinbase/components";
+import { foo, Button, Colors } from "@coinbase/components";
 
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -9,6 +9,11 @@ export default function App() {
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your {foo}!</Text>
       <StatusBar style="auto" />
+      <Button
+        text="Começar"
+        backgroundColor={Colors.mainBlue}
+        textStyle={{ color: "white" }}
+      />
     </View>
   );
 }
