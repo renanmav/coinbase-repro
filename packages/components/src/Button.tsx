@@ -10,7 +10,6 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import Animated from "react-native-reanimated";
 
 import Colors from "./Colors";
 
@@ -41,11 +40,9 @@ export default function Button({
   const textStyle: TextProps["style"] = [styles.text, textStyleProp];
 
   return (
-    <Animated.View>
-      <Pressable style={pressableStyle} {...pressableProps}>
-        <Text style={textStyle}>{text}</Text>
-      </Pressable>
-    </Animated.View>
+    <Pressable style={pressableStyle} {...pressableProps}>
+      <Text style={textStyle}>{text}</Text>
+    </Pressable>
   );
 }
 
