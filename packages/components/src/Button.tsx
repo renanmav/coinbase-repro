@@ -28,7 +28,7 @@ interface ButtonProps {
   backgroundColor?: string;
   backgroundPressedColor?: string;
   textStyle?: StyleProp<TextStyle>;
-  pressableStyle?: StyleProp<ViewStyle>;
+  viewStyle?: StyleProp<ViewStyle>;
   defaultScale?: number;
   reducedScale?: number;
 }
@@ -39,7 +39,7 @@ export default function ButtonWithPanGesture({
   backgroundColor = Colors.mainBlue,
   backgroundPressedColor = Colors.mainBlueLight,
   textStyle: textStyleProp,
-  pressableStyle: viewStyleProp,
+  viewStyle: viewStyleProp,
   defaultScale = DEFAULT_SCALE,
   reducedScale = REDUCED_SCALE,
 }: ButtonProps) {
