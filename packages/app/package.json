@@ -35,7 +35,8 @@
       "expo-file-system",
       "expo-keep-awake",
       "expo-modules-core",
-      "expo-structured-headers"
+      "expo-structured-headers",
+      "expo-status-bar"
     ]
   }
 }

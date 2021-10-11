@@ -12,8 +12,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@coinbase/components": "*",
     "expo": "~42.0.1",
     "expo-keep-awake": "~9.2.0",
+    "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -41,7 +43,8 @@
       "expo-file-system",
       "expo-keep-awake",
       "expo-modules-core",
-      "expo-structured-headers"
+      "expo-structured-headers",
+      "expo-status-bar"
     ]
   }
 }
