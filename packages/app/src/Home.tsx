@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { PixelRatio, StyleSheet, View } from "react-native";
+import { PixelRatio, StyleSheet, View, Vibration } from "react-native";
 
 import { StackParamList } from "./Navigation";
 
@@ -21,6 +21,7 @@ export default function Home() {
       viewStyle={styles.firstButtonStyle}
       onPress={() => {
         navigation.navigate("GetStarted");
+        Vibration.vibrate(100);
       }}
     />
   );
@@ -31,6 +32,7 @@ export default function Home() {
       textStyle={styles.textWhite}
       onPress={() => {
         navigation.navigate("Login");
+        Vibration.vibrate(100);
       }}
     />
   );
