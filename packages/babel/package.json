@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/core": "*",
     "@babel/plugin-proposal-class-properties": "*",
-    "babel-preset-expo": "^8.4.1"
+    "babel-preset-expo": "^8.4.1",
+    "react-native-reanimated": "^2.2.2"
   }
 }

@@ -1,48 +1,110 @@
 import React from "react";
 import {
   PixelRatio,
-  Pressable,
-  PressableProps,
   StyleProp,
   StyleSheet,
   Text,
-  TextProps,
   TextStyle,
   ViewStyle,
 } from "react-native";
+import {
+  TapGestureHandler,
+  TapGestureHandlerProps,
+} from "react-native-gesture-handler";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 import Colors from "./Colors";
 
-interface ButtonProps extends Omit<PressableProps, "style"> {
+const DEFAULT_SCALE = 1;
+const REDUCED_SCALE = 0.98;
+
+interface ButtonProps {
   text: string;
+  onPress?: () => void;
   backgroundColor?: string;
   backgroundPressedColor?: string;
   textStyle?: StyleProp<TextStyle>;
   pressableStyle?: StyleProp<ViewStyle>;
+  defaultScale?: number;
+  reducedScale?: number;
 }
 
-export default function Button({
+export default function ButtonWithPanGesture({
   text,
+  onPress,
   backgroundColor = Colors.mainBlue,
   backgroundPressedColor = Colors.mainBlueLight,
   textStyle: textStyleProp,
-  pressableStyle: pressableStyleProp,
-  ...pressableProps
+  pressableStyle: viewStyleProp,
+  defaultScale = DEFAULT_SCALE,
+  reducedScale = REDUCED_SCALE,
 }: ButtonProps) {
-  const pressableStyle: PressableProps["style"] = ({ pressed }) => [
+  const scaleValue = useSharedValue(defaultScale);
+  const backgroundColorValue = useSharedValue<string>(backgroundColor);
+
+  const scaleStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        scale: scaleValue.value,
+      },
+    ],
+  }));
+
+  const backgroundColorStyle = useAnimatedStyle(() => ({
+    backgroundColor: backgroundColorValue.value,
+  }));
+
+  const timingConfig: Animated.WithTimingConfig = {
+    duration: 200,
+  };
+
+  const onBegan: TapGestureHandlerProps["onBegan"] = () => {
+    scaleValue.value = withTiming(reducedScale);
+    backgroundColorValue.value = withTiming(
+      backgroundPressedColor,
+      timingConfig
+    ) as unknown as string;
+  };
+
+  const onEnded: TapGestureHandlerProps["onEnded"] = () => {
+    scaleValue.value = withTiming(defaultScale);
+    backgroundColorValue.value = withTiming(
+      backgroundColor,
+      timingConfig
+    ) as unknown as string;
+
+    if (onPress) onPress();
+  };
+
+  const viewStyle: StyleProp<ViewStyle> = [
     styles.pressable,
-    {
-      backgroundColor: pressed ? backgroundPressedColor : backgroundColor,
-    },
-    pressableStyleProp,
+    { backgroundColor },
+    viewStyleProp,
+    scaleStyle,
+    backgroundColorStyle,
   ];
 
-  const textStyle: TextProps["style"] = [styles.text, textStyleProp];
+  const textStyle: StyleProp<TextStyle> = [styles.text, textStyleProp];
 
   return (
-    <Pressable style={pressableStyle} {...pressableProps}>
-      <Text style={textStyle}>{text}</Text>
-    </Pressable>
+    <TapGestureHandler
+      {...{
+        onBegan,
+        onEnded,
+        onFailed: onEnded,
+        onCancelled: onEnded,
+        maxDeltaY: 20,
+        maxDeltaX: 20,
+      }}
+    >
+      <Animated.View style={viewStyle}>
+        <Text style={textStyle}>{text}</Text>
+      </Animated.View>
+    </TapGestureHandler>
   );
 }
 

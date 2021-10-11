@@ -1,7 +1,7 @@
 import React from "react";
 
-import StorybookUI from "./storybook";
+import Storybook from "./storybook";
 
 export default function App() {
-  return <StorybookUI />;
+  return <Storybook />;
 }
