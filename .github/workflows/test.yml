@@ -1,0 +1,33 @@
+name: Unit tests
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message , '[skip ci]')"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - name: Get yarn cache dir
+        id: get-yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache yarn.lock
+        id: yarn-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ steps.get-yarn-cache.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install
+        run: |
+          yarn config set unsafe-disable-integrity-migration true -g
+          yarn install --frozen-lockfile --production=false --non-interactive --cache-folder $(yarn cache dir)
+      - name: Test
+        run: |
+          yarn test --ci --verbose
