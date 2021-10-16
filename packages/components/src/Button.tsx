@@ -21,7 +21,7 @@ import Colors from "./Colors";
 const DEFAULT_SCALE = 1;
 const REDUCED_SCALE = 0.98;
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   onPress?: () => void;
   backgroundColor?: string;
@@ -100,8 +100,10 @@ export default function ButtonWithPanGesture({
         maxDeltaX: 20,
       }}
     >
-      <Animated.View style={viewStyle}>
-        <Animated.Text style={textStyle}>{text}</Animated.Text>
+      <Animated.View style={viewStyle} testID="button-view">
+        <Animated.Text style={textStyle} testID="button-text">
+          {text}
+        </Animated.Text>
       </Animated.View>
     </TapGestureHandler>
   );
