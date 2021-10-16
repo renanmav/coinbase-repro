@@ -1,17 +1,22 @@
-import { BottomSheet, Button } from "@coinbase/components";
+import { BottomSheet, Button, BottomSheetRef } from "@coinbase/components";
 
-import React, { useState } from "react";
+import React, { useMemo, useRef } from "react";
 import { Text, View } from "react-native";
 
 import CenterView from "./CenterView";
 
 export default function BottomSheetStories() {
-  const [visible, setVisible] = useState(false);
+  const bottomSheetRef = useRef<BottomSheetRef>(null);
+  const snapPoints = useMemo(() => ["50%"], []);
 
   return (
     <CenterView padding={20}>
-      <Button text="Abrir" onPress={() => setVisible(true)} />
-      <BottomSheet visible={visible} onClose={() => setVisible(false)}>
+      <Button
+        text="Abrir"
+        onPress={() => bottomSheetRef.current?.expand()}
+        textStyle={{ color: "white" }}
+      />
+      <BottomSheet ref={bottomSheetRef} snapPoints={snapPoints} index={0}>
         <View style={{ backgroundColor: "red", padding: 20 }}>
           <Text>Conteúdo</Text>
         </View>
