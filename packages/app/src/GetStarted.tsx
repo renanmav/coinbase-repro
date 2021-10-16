@@ -1,10 +1,10 @@
-import { BottomSheet, Button, Colors } from "@coinbase/components";
+import { BottomSheet, BottomSheetRef, Button } from "@coinbase/components";
 
 import { Header, HeaderBackButton } from "@react-navigation/elements";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { PixelRatio, StyleSheet, Text, Vibration, View } from "react-native";
 
 import { StackParamList } from "./Navigation";
@@ -13,22 +13,25 @@ export default function GetStarted() {
   const navigation =
     useNavigation<NativeStackNavigationProp<StackParamList, "GetStarted">>();
 
-  const [bsVisible, setBSVisible] = useState(false);
-  const onBSClose = () => setBSVisible(false);
+  const bottomSheetRef = useRef<BottomSheetRef>(null);
+  const snapPoints = useMemo(() => [250], []);
 
-  const onGoBack = () => {
-    onBSClose();
+  const onGoBack = useCallback(() => {
+    const DURATION = 300;
+    bottomSheetRef.current?.close({
+      duration: DURATION,
+    });
     Vibration.vibrate(100);
-    navigation.goBack();
-  };
+    setTimeout(() => navigation.goBack(), DURATION);
+  }, []);
 
-  const onGoBackCancel = () => {
-    onBSClose();
-  };
+  const onGoBackCancel = useCallback(() => {
+    bottomSheetRef.current?.close();
+  }, []);
 
-  const onConfirmationGoBack = () => {
-    setBSVisible(true);
-  };
+  const onConfirmationGoBack = useCallback(() => {
+    bottomSheetRef.current?.expand();
+  }, []);
 
   const BottomSheetContent = () => (
     <View style={styles.bsContainer}>
@@ -65,23 +68,23 @@ export default function GetStarted() {
   );
 
   return (
-    <View>
+    <>
       <StatusBar style="dark" />
       <Header
         title=""
         headerLeft={() => <HeaderBackButton onPress={onConfirmationGoBack} />}
       />
       <Content />
-      <BottomSheet visible={bsVisible} onClose={onBSClose}>
+      <BottomSheet ref={bottomSheetRef} snapPoints={snapPoints} index={-1}>
         <BottomSheetContent />
       </BottomSheet>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: Colors.mainBlueLight,
+    backgroundColor: "grey",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",

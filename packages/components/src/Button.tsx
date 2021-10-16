@@ -3,7 +3,6 @@ import {
   PixelRatio,
   StyleProp,
   StyleSheet,
-  Text,
   TextStyle,
   ViewStyle,
 } from "react-native";
@@ -102,7 +101,7 @@ export default function ButtonWithPanGesture({
       }}
     >
       <Animated.View style={viewStyle}>
-        <Text style={textStyle}>{text}</Text>
+        <Animated.Text style={textStyle}>{text}</Animated.Text>
       </Animated.View>
     </TapGestureHandler>
   );
@@ -112,10 +111,11 @@ const styles = StyleSheet.create({
   pressable: {
     width: "100%",
     borderRadius: PixelRatio.roundToNearestPixel(5),
+    paddingVertical: PixelRatio.roundToNearestPixel(20),
   },
   text: {
+    color: "black",
     textAlign: "center",
-    marginVertical: PixelRatio.roundToNearestPixel(15),
     fontSize: PixelRatio.roundToNearestPixel(15),
     fontWeight: "bold",
   },

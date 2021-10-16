@@ -1,7 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/routers/src/types";
-import React from "react";
+import React, { useMemo } from "react";
 
 import GetStarted from "./GetStarted";
 import Home from "./Home";
@@ -16,24 +19,20 @@ export interface StackParamList extends ParamListBase {
 const Stack = createNativeStackNavigator<StackParamList>();
 
 export default function Navigation() {
+  const screenOptions = useMemo<NativeStackNavigationOptions>(
+    () => ({
+      headerShown: false,
+      safeAreaInsets: { top: 0 },
+    }),
+    []
+  );
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="GetStarted"
-          component={GetStarted}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
+    <NavigationContainer independent={true}>
+      <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
