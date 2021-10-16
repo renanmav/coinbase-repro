@@ -14,7 +14,7 @@ export default function GetStarted() {
     useNavigation<NativeStackNavigationProp<StackParamList, "GetStarted">>();
 
   const bottomSheetRef = useRef<BottomSheetRef>(null);
-  const snapPoints = useMemo(() => [PixelRatio.roundToNearestPixel(250)], []);
+  const snapPoints = useMemo(() => [PixelRatio.roundToNearestPixel(220)], []);
 
   const onGoBack = useCallback(() => {
     const DURATION = 300;
