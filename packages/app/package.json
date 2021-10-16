@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@coinbase/components": "*",
+    "@react-navigation/elements": "^1.2.1",
     "@react-navigation/native": "^6.0.5",
     "@react-navigation/native-stack": "^6.2.3",
     "expo": "~42.0.1",
