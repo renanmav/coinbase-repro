@@ -1,13 +1,30 @@
-import { BottomSheet, BottomSheetRef, Button } from "@coinbase/components";
+import {
+  BottomSheet,
+  BottomSheetRef,
+  Button,
+  Transaction,
+  ActionButton,
+} from "@coinbase/components";
 
 import { Header, HeaderBackButton } from "@react-navigation/elements";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import React, { useCallback, useMemo, useRef } from "react";
-import { PixelRatio, StyleSheet, Text, Vibration, View } from "react-native";
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import {
+  Dimensions,
+  PixelRatio,
+  StyleSheet,
+  Text,
+  Vibration,
+  View,
+} from "react-native";
 
 import { StackParamList } from "./Navigation";
+
+type OrderSize = number;
+type Price = number;
+type TransactionTuple = [OrderSize, Price];
 
 export default function GetStarted() {
   const navigation =
@@ -61,9 +78,80 @@ export default function GetStarted() {
     </View>
   );
 
+  const [boughtTransactions, setBoughtTransactions] = useState<
+    TransactionTuple[]
+  >([]);
+  const [soldTransactions, setSoldTransactions] = useState<TransactionTuple[]>(
+    []
+  );
+
+  const onBuy = () => {
+    setBoughtTransactions((prevState) => {
+      const newTransaction: TransactionTuple = [Math.random(), Math.random()];
+      const sortedState = [...prevState, newTransaction];
+      return sortedState.sort((a, b) => {
+        const aPrice = a[1];
+        const bPrice = b[1];
+        return bPrice - aPrice;
+      });
+    });
+  };
+
+  const onSell = () => {
+    setSoldTransactions((prevState) => {
+      const newTransaction: TransactionTuple = [Math.random(), Math.random()];
+      const sortedState = [...prevState, newTransaction];
+      return sortedState.sort((a, b) => {
+        const aPrice = a[1];
+        const bPrice = b[1];
+        return bPrice - aPrice;
+      });
+    });
+  };
+
+  const SoldTransactions = () => {
+    return (
+      <>
+        {soldTransactions.map((transaction, index) => {
+          return (
+            <Transaction
+              index={index}
+              transaction={transaction}
+              valueBackground="red"
+            />
+          );
+        })}
+      </>
+    );
+  };
+
+  const BoughtTransactions = () => {
+    return (
+      <>
+        {boughtTransactions.map((transaction, index) => {
+          return (
+            <Transaction
+              index={index}
+              transaction={transaction}
+              valueBackground="green"
+            />
+          );
+        })}
+      </>
+    );
+  };
+
   const Content = () => (
     <View style={styles.content}>
-      <Text style={styles.contentText}>Webview?</Text>
+      <View style={styles.row}>
+        <ActionButton text="Buy" onPress={onBuy} style={styles.buyButton} />
+        <ActionButton text="Sell" onPress={onSell} />
+      </View>
+      <View style={styles.transactionContainer}>
+        <SoldTransactions />
+        <View style={styles.horizontalDivider} />
+        <BoughtTransactions />
+      </View>
     </View>
   );
 
@@ -84,14 +172,10 @@ export default function GetStarted() {
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: "grey",
+    backgroundColor: "black",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-  },
-  contentText: {
-    color: "white",
-    fontSize: PixelRatio.roundToNearestPixel(20),
   },
   bsContainer: {
     flex: 1,
@@ -122,5 +206,22 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: "gray",
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  buyButton: {
+    marginRight: PixelRatio.roundToNearestPixel(10),
+    backgroundColor: "green",
+  },
+  transactionContainer: {
+    padding: PixelRatio.roundToNearestPixel(10),
+  },
+  horizontalDivider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: "white",
+    width: Dimensions.get("screen").width,
+    marginVertical: PixelRatio.roundToNearestPixel(10),
   },
 });
